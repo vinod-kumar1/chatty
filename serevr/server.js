@@ -1,9 +1,17 @@
-import http from "node:http";
+import https from "node:http";
 import readline from "node:readline";
 import { stdin as input, stdout as output } from "node:process";
 import { WebSocketServer } from "ws";
+import mysql from "mysql2";
+import { dbConnect } from "../PRIVATEKEYS.js";
 
-let httpServer = http.createServer((req, res) => {
+var connection = mysql.createConnection(dbConnect);
+
+connection.query("select * from Users", (err, res, fields) => {
+  console.log(res);
+});
+
+let httpServer = https.createServer({}, (req, res) => {
   if ((req.url = "/home")) res.end("Home");
 });
 let rl = readline.createInterface({ input, output });
@@ -19,8 +27,6 @@ wss.on("connection", (ws) => {
       }
     });
   });
-
-  ws.send(JSON.stringify({ payload: "Hi" }));
 
   ws.on("message", (data) => {
     let inp = JSON.parse(data);
