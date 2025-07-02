@@ -14,7 +14,7 @@ const App = () => {
   useEffect(() => {
     if (window.onbeforeunload)
       window.addEventListener("beforeunload", () => {
-        wsc.close();
+        // wsc.close();
         console.log("Websocket disconnected!");
       });
 

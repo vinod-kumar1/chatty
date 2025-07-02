@@ -1,6 +1,22 @@
-import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import App from "./App.tsx";
+import GooglyDoc from "../Components/GooglyDoc.tsx";
+import Home from "../Components/Home.tsx";
 
-createRoot(document.getElementById("root")!).render(<App />);
+import App from "./App.tsx";
+import { createBrowserRouter, RouterProvider } from "react-router";
+
+let router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Home,
+  },
+  {
+    path: "/:doc_id",
+    Component: GooglyDoc,
+  },
+]);
+
+createRoot(document.getElementById("root")!).render(
+  <RouterProvider router={router} />
+);
